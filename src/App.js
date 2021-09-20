@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import './App.css';
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
@@ -8,8 +8,8 @@ import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
 import {BrowserRouter, Route} from "react-router-dom";
-import {addPost} from "./Redux/state";
-import Render from './render'
+
+
 
 
 const App = (props) => {
@@ -19,9 +19,13 @@ const App = (props) => {
                 <Header/>
                 <Navbar state={props.state.sidebar}/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" render={() => <Profile state={props.state.profile}
-                                                                  addPost={props.addPost} />}/>
-                    <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogs}/>}/>
+                    <Route path="/profile" render={() => <Profile profile={props.state.profile}
+                                                                  dispatch={props.dispatch}
+
+                    />}/>
+                    <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogs}
+                                                                  dispatch={props.dispatch}
+                    />}/>
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
                     <Route path="/settings" component={Settings}/>
