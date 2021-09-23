@@ -1,6 +1,11 @@
+import ProfileReducer from "./profile-reducer";
+import DialogsReducer from "./dialogs-reducer";
+import SidebarReducer from "./sidebar-reducer";
+
+
+
 let store = {
     _state: {
-
         profile: {
             postData: [
                 {id: "1", text: "One experiment in other folder", like_counts: "15", dislike_counts: "none"},
@@ -19,7 +24,7 @@ let store = {
                 },
                 {id: "5", text: "My house is my bulwark", like_counts: "5", dislike_counts: "none"},
             ],
-            newPostText: "Push new post"
+            newPostText: ""
         },
         dialogs: {
             dialogsData: [
@@ -55,7 +60,7 @@ let store = {
                 {id: "6", text: "Tax in Russia how a savage in Silicon Valley"},
 
             ],
-            newMessageText: "Write your message, please",
+            newMessageText: "",
         },
         sidebar: {
             friends: [
@@ -68,7 +73,6 @@ let store = {
     _callSubscriber() {
         console.log('State was changed')
     },
-
     getState() {
 
         return this._state
@@ -76,37 +80,21 @@ let store = {
     subscribe(observer) {
         this._callSubscriber = observer;
     },
-
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {
-                id: "7",
-                text: this._state.profile.newPostText,
-                like_counts: "150",
-            }
 
-            this._state.profile.postData.push(newPost);
-            this._state.profile.newPostText = "";
-            this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profile.newPostText = action.newText;
-            this._callSubscriber(this._state)
-        } else if (action.type === 'ADD-MESSAGE') {
-            let newMessage = {
-                id: "10",
-                text: this._state.dialogs.newMessageText,
-            }
 
-            this._state.dialogs.messageData.push(newMessage);
-            this._state.dialogs.newMessageText = "";
-            this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.dialogs.newMessageText = action.newMessageText;
-            this._callSubscriber(this._state)
-        }
+        this._state.profile = ProfileReducer(this._state.profile, action);
+        this._state.dialogs = DialogsReducer(this._state.dialogs, action);
+        this._state.sidebar = SidebarReducer(this._state.sidebar, action);
 
+        this._callSubscriber(this._state)
     }
+
 }
+
+
+
+
 
 
 export default store;
