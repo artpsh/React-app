@@ -74,15 +74,12 @@ let store = {
         console.log('State was changed')
     },
     getState() {
-
         return this._state
     },
     subscribe(observer) {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-
-
         this._state.profile = ProfileReducer(this._state.profile, action);
         this._state.dialogs = DialogsReducer(this._state.dialogs, action);
         this._state.sidebar = SidebarReducer(this._state.sidebar, action);
@@ -91,11 +88,6 @@ let store = {
     }
 
 }
-
-
-
-
-
 
 export default store;
 window.store = store;

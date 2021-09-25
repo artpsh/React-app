@@ -1,3 +1,4 @@
+/*
 import React from "react";
 import classes from './Friend.module.css';
 
@@ -13,4 +14,4 @@ return <div className={classes.friendBlock}>
 
 
 
-export default Friend
+export default Friend*/
