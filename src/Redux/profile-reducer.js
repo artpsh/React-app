@@ -11,33 +11,31 @@ let initialState = {
             like_counts: "35",
             dislike_counts: "none"
         },
-        {
-            id: "4",
-            text: "I love coffee, it give me a real taste of life",
-            like_counts: "12",
-            dislike_counts: "none"
-        },
-        {id: "5", text: "My house is my bulwark", like_counts: "5", dislike_counts: "none"},
     ],
     newPostText: ""
 };
 
 const ProfileReducer = (state = initialState, action) => {
+
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             let newPost = {
-                id: "7",
+                id: 7,
                 text: state.newPostText,
                 like_counts: "150",
-            }
-            state.postData.push(newPost);
-            state.newPostText = "";
-            break;
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            break;
+            };
+            let stateCopy = {...state};
+            stateCopy.postData = [...stateCopy.postData];
+            stateCopy.postData.push(newPost);
+            stateCopy.newPostText = "";
+            return stateCopy;
     }
-
+        case UPDATE_NEW_POST_TEXT: {
+            let stateCopy = {...state};
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
+        }
+    }
     return state;
 }
 
