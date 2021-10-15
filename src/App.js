@@ -1,14 +1,14 @@
 import React from "react";
 import './App.css';
-import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
-import Profile from "./Components/Profile/Profile";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
 import {BrowserRouter, Route} from "react-router-dom";
 import UserContainer from "./Components/Users/UserContainer";
+import ProfileContainer from "./Components/Profile/ProfileContainer";
+import HeaderContainer from "./Components/Header/HeaderContainer";
 
 
 
@@ -17,11 +17,11 @@ const App = (props) => {
 
     return (
             <div className="app-wrapper">
-                <Header/>
+                <HeaderContainer/>
                 <Navbar />
                 <div className="app-wrapper-content">
-                    <Route path="/profile"
-                           render={() => <Profile /> }/>
+                    <Route path="/profile/:userId?"
+                           render={() => <ProfileContainer /> }/>
 
                     <Route path="/dialogs"
                            render={() => <DialogsContainer /> }/>
